@@ -1,5 +1,6 @@
 package net.hoerzintelligence.mygarages.services;
 
+import net.hoerzintelligence.mygarages.data.ConfigurationBundle;
 import net.hoerzintelligence.mygarages.data.garage.GarageDto;
 import net.hoerzintelligence.mygarages.data.garage.GarageResource;
 
@@ -9,6 +10,10 @@ public class Model {
     private Model(){}
     public static Model getInstance(){
         return instance;
+    }
+
+    public void setConfigurationBundle(ConfigurationBundle bundle){
+        service.setConfigurationBundle(bundle);
     }
 
     public GarageResource addGarage(GarageDto garageDto){
