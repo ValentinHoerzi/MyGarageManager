@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.*?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="net.hoerzintelligence.mygarages.controller.GaragesController"
             prefHeight="400.0" prefWidth="600.0">
-
+    <children>
+        <TableView fx:id="tableGarages" layoutX="14.0" layoutY="82.0" onMouseClicked="#handleGarageSelection"
+                   prefHeight="200.0" styleClass="tableView" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0"
+                   AnchorPane.topAnchor="83.0">
+            <columns>
+                <TableColumn fx:id="columnId" maxWidth="80.0" minWidth="80.0" resizable="false" text="Id">
+                    <styleClass>
+                        <String fx:value="tableColumn-"/>
+                        <String fx:value="tableColumn2"/>
+                    </styleClass>
+                </TableColumn>
+                <TableColumn fx:id="columnName" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"
+                             resizable="false" text="Name">
+                    <styleClass>
+                        <String fx:value="tableColumn"/>
+                        <String fx:value="tableColumn3"/>
+                    </styleClass>
+                </TableColumn>
+                <TableColumn fx:id="columnAddress" maxWidth="100.0" minWidth="100.0" prefWidth="100.0"
+                             resizable="false" text="Address">
+                    <styleClass>
+                        <String fx:value="tableColumn-"/>
+                        <String fx:value="tableColumn4"/>
+                    </styleClass>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>

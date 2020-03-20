@@ -3,6 +3,7 @@ package net.hoerzintelligence.mygarages.data.garage;
 import lombok.Data;
 import lombok.ToString;
 import net.hoerzintelligence.mygarages.data.car.CarResource;
+
 import java.util.List;
 
 @Data

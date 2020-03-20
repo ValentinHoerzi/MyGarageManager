@@ -1,8 +1,12 @@
 package net.hoerzintelligence.mygarages.services;
 
 import net.hoerzintelligence.mygarages.data.ConfigurationBundle;
+import net.hoerzintelligence.mygarages.data.car.CarDto;
+import net.hoerzintelligence.mygarages.data.car.CarResource;
 import net.hoerzintelligence.mygarages.data.garage.GarageDto;
 import net.hoerzintelligence.mygarages.data.garage.GarageResource;
+
+import java.util.List;
 
 public class Model {
     private RestDataService service = new RestDataService();
@@ -16,10 +20,35 @@ public class Model {
         service.setConfigurationBundle(bundle);
     }
 
+    public List<GarageResource> getAllGarages() {
+        return service.getAllGarages();
+    }
+
     public GarageResource addGarage(GarageDto garageDto){
-        GarageDto temp = new GarageDto();
-        temp.setAddress("Hydenstraße 14");
-        temp.setName("Vali's Garage");
-        return service.addGarage(temp);
+        return service.addGarage(garageDto);
+    }
+
+    public  GarageResource editGarage(Integer id, GarageDto garageDto){
+        return service.editGarage(id,garageDto);
+    }
+
+    public String deleteGarage(Integer id){
+        return service.deleteGarage(id);
+    }
+
+    public List<CarResource> getAllCarsOfGarage(Integer id){
+        return service.getAllCarsOfGarage(id);
+    }
+
+    public GarageResource addCarToGarage(Integer id, CarDto carDto){
+        return service.addCarToGarage(id,carDto);
+    }
+
+    public String deleteCarInGarage(Integer garageId, Integer carId) {
+        return service.deleteCarInGarage(garageId,carId);
+    }
+
+    GarageResource moveCarToOtherGarage(Integer garageIdOld, Integer carId, Integer garageIdNew){
+        return service.moveCarToOtherGarage(garageIdOld,carId,garageIdNew);
     }
 }

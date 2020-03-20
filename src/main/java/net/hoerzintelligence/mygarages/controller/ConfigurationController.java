@@ -1,9 +1,5 @@
 package net.hoerzintelligence.mygarages.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +12,12 @@ import net.hoerzintelligence.mygarages.data.ConfigurationBundle;
 import net.hoerzintelligence.mygarages.services.Model;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class ConfigurationController implements Initializable {
 
-    private Model model = Model.getInstance();
+    private final Model model = Model.getInstance();
     @FXML
     private TextField txtGetAllGarages;
     @FXML
@@ -41,7 +40,7 @@ public class ConfigurationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
 
     @FXML
