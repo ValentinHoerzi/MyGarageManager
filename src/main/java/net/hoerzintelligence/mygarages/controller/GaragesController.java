@@ -88,10 +88,9 @@ public class GaragesController implements Initializable {
         dto.setName(garageName);
         dto.setAddress(garageAddress);
 
-        new Thread(()->{
-            model.addGarage(dto);
-            updateView();
-        }).start();
+        selectedGarage = null;
+        model.addGarage(dto);
+        updateView();
 
         clearGarageTextFields();
     }
@@ -107,11 +106,8 @@ public class GaragesController implements Initializable {
         carDto.setBrand(carBrand);
         carDto.setHorsePower(carPS);
 
-        new Thread(()->{
-            selectedGarage = null;
-            model.addCarToGarage(selectedGarage.getId(), carDto);
-            updateView();
-        }).start();
+        model.addCarToGarage(selectedGarage.getId(), carDto);
+        updateView();
 
         clearCarTextFields();
     }
@@ -132,10 +128,17 @@ public class GaragesController implements Initializable {
     @FXML
     private void handleCarSelection(MouseEvent mouseEvent) {
         CarResource selectedItem = tableCars.getSelectionModel().getSelectedItem();
+        selectedCar = selectedItem;
 
+        String[] vars = selectedCar.getBrandAndName().split(" ");
+        txtCarName.setText(vars[1]);
+        txtCarBrand.setText(vars[0]);
+        txtCarPS.setText(selectedCar.getHorsePower());
+
+        tableCars.getSelectionModel().clearSelection();
     }
 
-    private synchronized void updateView() {
+    private void updateView() {
         List<GarageResource> garages = model.getAllGarages();
         garageData.clear();
         garageData.setAll(garages);
@@ -148,6 +151,7 @@ public class GaragesController implements Initializable {
             carData.clear();
             carData.setAll(allCarsOfGarage);
         }else{
+            carData.clear();
             buttonAdd.setDisable(true);
             lblSelectedGarage.setText("No garage selected!");
         }
