@@ -3,70 +3,102 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
-<AnchorPane id="AnchorPane" prefHeight="663.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.hoerzintelligence.mygarages.controller.ConfigurationController">
+<AnchorPane id="AnchorPane" prefHeight="663.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="net.hoerzintelligence.mygarages.controller.ConfigurationController">
     <children>
-        <Label layoutX="105.0" layoutY="61.0" prefHeight="53.0" prefWidth="274.0" text="Configuration panel" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <Label layoutX="105.0" layoutY="61.0" prefHeight="53.0" prefWidth="274.0" text="Configuration panel"
+               AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
             <font>
-                <Font name="Calibri Bold" size="24.0" />
+                <Font name="Calibri Bold" size="24.0"/>
             </font>
         </Label>
-        <Label layoutX="94.0" layoutY="101.0" prefHeight="35.0" prefWidth="210.0" text="Get all garages" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0">
+        <Label layoutX="94.0" layoutY="101.0" prefHeight="35.0" prefWidth="210.0" text="Get all garages"
+               AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="72.0" layoutY="232.0" prefHeight="35.0" prefWidth="210.0" text="Add garage" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0">
+        <Label layoutX="72.0" layoutY="232.0" prefHeight="35.0" prefWidth="210.0" text="Add garage"
+               AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="82.0" layoutY="242.0" prefHeight="35.0" prefWidth="240.0" text="Edit garage [ required: {garageId}]" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="300.0">
+        <Label layoutX="82.0" layoutY="242.0" prefHeight="35.0" prefWidth="240.0"
+               text="Edit garage [ required: {garageId}]" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="300.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="82.0" layoutY="242.0" prefHeight="35.0" prefWidth="240.0" text="Delete garage [ required: {garageId}]" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="400.0">
+        <Label layoutX="82.0" layoutY="242.0" prefHeight="35.0" prefWidth="240.0"
+               text="Delete garage [ required: {garageId}]" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="400.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0" text="Get all cars of garage [ required: {garageId}]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0"
+               text="Get all cars of garage [ required: {garageId}]" AnchorPane.rightAnchor="20.0"
+               AnchorPane.topAnchor="100.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0" text="Add car to garage [ required: {garageId}]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
+        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0"
+               text="Add car to garage [ required: {garageId}]" AnchorPane.rightAnchor="20.0"
+               AnchorPane.topAnchor="200.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0" text="Delete car in garage [ required: {garageId} , {carId}]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="300.0">
+        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0"
+               text="Delete car in garage [ required: {garageId} , {carId}]" AnchorPane.rightAnchor="20.0"
+               AnchorPane.topAnchor="300.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0" text="Move car to other garage [required: {garageIdOld} , {carId} , {garageIdNew}]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="400.0">
+        <Label layoutX="104.0" layoutY="111.0" prefHeight="35.0" prefWidth="450.0"
+               text="Move car to other garage [required: {garageIdOld} , {carId} , {garageIdNew}]"
+               AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="400.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <TextField fx:id="txtGetAllGarages" layoutX="20.0" layoutY="153.0" prefHeight="35.0" prefWidth="240.0" text="garages" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0" />
-        <TextField fx:id="txtAddGarage" layoutX="14.0" layoutY="247.0" prefHeight="35.0" prefWidth="240.0" text="garages" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0" />
-        <TextField fx:id="txtEditGarage" layoutX="5.0" layoutY="346.0" prefHeight="35.0" prefWidth="240.0" text="garages/{garageId}" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="350.0" />
-        <TextField fx:id="txtDeleteGarage" layoutX="5.0" layoutY="461.0" prefHeight="35.0" prefWidth="240.0" text="garages/{garageId}" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="450.0" />
-        <TextField fx:id="txtPort" alignment="CENTER" layoutX="422.0" layoutY="155.0" prefHeight="25.0" prefWidth="87.0" text="9001" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="514.0" />
-        <Label alignment="CENTER" layoutX="422.0" layoutY="118.0" prefHeight="35.0" prefWidth="87.0" text="Port" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="514.0">
+        <TextField fx:id="txtGetAllGarages" layoutX="20.0" layoutY="153.0" prefHeight="35.0" prefWidth="240.0"
+                   text="garages" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0"/>
+        <TextField fx:id="txtAddGarage" layoutX="14.0" layoutY="247.0" prefHeight="35.0" prefWidth="240.0"
+                   text="garages" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="250.0"/>
+        <TextField fx:id="txtEditGarage" layoutX="5.0" layoutY="346.0" prefHeight="35.0" prefWidth="240.0"
+                   text="garages/{garageId}" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="350.0"/>
+        <TextField fx:id="txtDeleteGarage" layoutX="5.0" layoutY="461.0" prefHeight="35.0" prefWidth="240.0"
+                   text="garages/{garageId}" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="450.0"/>
+        <TextField fx:id="txtPort" alignment="CENTER" layoutX="422.0" layoutY="155.0" prefHeight="25.0" prefWidth="87.0"
+                   text="9001" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="514.0"/>
+        <Label alignment="CENTER" layoutX="422.0" layoutY="118.0" prefHeight="35.0" prefWidth="87.0" text="Port"
+               AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="514.0">
             <font>
-                <Font name="Calibri" size="14.0" />
+                <Font name="Calibri" size="14.0"/>
             </font>
         </Label>
-        <TextField fx:id="txtGetAllCarsOfGarage" layoutX="553.0" layoutY="150.0" prefHeight="35.0" prefWidth="450.0" text="garages/{garageId}/cars" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0" />
-        <TextField fx:id="txtAddCarToGarage" layoutX="553.0" layoutY="250.0" prefHeight="35.0" prefWidth="450.0" text="garages/{garageId}/cars" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0" />
-        <TextField fx:id="txtDeleteCarInGarage" layoutX="553.0" layoutY="350.0" prefHeight="35.0" prefWidth="450.0" text="garages/{garageId}/cars/{carId}" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="350.0" />
-        <TextField fx:id="txtMoveCarToOtherGarage" layoutX="540.0" layoutY="450.0" prefHeight="35.0" prefWidth="450.0" text="garages/{garageIdOld}/cars/{carId}/to/{garageIdNew}" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="450.0" />
-        <Button layoutX="73.0" layoutY="573.0" mnemonicParsing="false" onAction="#onButtonSave" prefHeight="60.0" prefWidth="210.0" text="Save configurations" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
-        <Button layoutX="361.0" layoutY="583.0" mnemonicParsing="false" onAction="#onButtonLoad" prefHeight="60.0" prefWidth="210.0" text="Load configurations" AnchorPane.bottomAnchor="20.0" />
-        <Button layoutX="763.0" layoutY="583.0" mnemonicParsing="false" onAction="#onButtonPerceed" prefHeight="60.0" prefWidth="210.0" text="Perceed" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+        <TextField fx:id="txtGetAllCarsOfGarage" layoutX="553.0" layoutY="150.0" prefHeight="35.0" prefWidth="450.0"
+                   text="garages/{garageId}/cars" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0"
+                   AnchorPane.topAnchor="150.0"/>
+        <TextField fx:id="txtAddCarToGarage" layoutX="553.0" layoutY="250.0" prefHeight="35.0" prefWidth="450.0"
+                   text="garages/{garageId}/cars" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0"
+                   AnchorPane.topAnchor="250.0"/>
+        <TextField fx:id="txtDeleteCarInGarage" layoutX="553.0" layoutY="350.0" prefHeight="35.0" prefWidth="450.0"
+                   text="garages/{garageId}/cars/{carId}" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="20.0"
+                   AnchorPane.topAnchor="350.0"/>
+        <TextField fx:id="txtMoveCarToOtherGarage" layoutX="540.0" layoutY="450.0" prefHeight="35.0" prefWidth="450.0"
+                   text="garages/{garageIdOld}/cars/{carId}/to/{garageIdNew}" AnchorPane.leftAnchor="553.0"
+                   AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="450.0"/>
+        <Button layoutX="73.0" layoutY="573.0" mnemonicParsing="false" onAction="#onButtonSave" prefHeight="60.0"
+                prefWidth="210.0" text="Save configurations" AnchorPane.bottomAnchor="20.0"
+                AnchorPane.leftAnchor="20.0"/>
+        <Button layoutX="361.0" layoutY="583.0" mnemonicParsing="false" onAction="#onButtonLoad" prefHeight="60.0"
+                prefWidth="210.0" text="Load configurations" AnchorPane.bottomAnchor="20.0"/>
+        <Button layoutX="763.0" layoutY="583.0" mnemonicParsing="false" onAction="#onButtonPerceed" prefHeight="60.0"
+                prefWidth="210.0" text="Perceed" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
     </children>
 </AnchorPane>

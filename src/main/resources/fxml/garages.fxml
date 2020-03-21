@@ -38,6 +38,7 @@
         <TextField fx:id="txtGarageAddress" layoutX="389.0" layoutY="282.0" prefWidth="250.0" promptText="Address"/>
         <TextField fx:id="txtGarageName" layoutX="139.0" layoutY="282.0" prefWidth="250.0" promptText="Name"/>
         <TableView fx:id="tableCars" layoutX="89.0" layoutY="420.0" prefHeight="180.0" prefWidth="550.0"
+                   onMouseClicked="#handleCarSelection"
                    styleClass="tableView">
             <columns>
                 <TableColumn fx:id="columnCarId" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="50.0"
@@ -63,12 +64,11 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <Button layoutX="89.0" layoutY="629.0" mnemonicParsing="false" onAction="#onButtonAddCar" prefWidth="50.0"
+        <Button fx:id="buttonAdd" layoutX="89.0" layoutY="629.0" mnemonicParsing="false" onAction="#onButtonAddCar" prefWidth="50.0"
                 text="Add"/>
         <TextField fx:id="txtCarPS" layoutX="489.0" layoutY="629.0" prefWidth="150.0" promptText="PS"/>
         <TextField fx:id="txtCarName" layoutX="314.0" layoutY="629.0" prefWidth="175.0" promptText="Name"/>
         <TextField fx:id="txtCarBrand" layoutX="139.0" layoutY="629.0" prefWidth="175.0" promptText="Brand"/>
-        <Label fx:id="lblSelectedGarage" layoutX="89.0" layoutY="362.0" prefHeight="49.0" prefWidth="150.0"
-               text="No garage selected!"/>
+        <Label fx:id="lblSelectedGarage" layoutX="89.0" layoutY="362.0" prefHeight="49.0" prefWidth="150.0"/>
     </children>
 </AnchorPane>
