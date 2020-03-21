@@ -20,9 +20,13 @@ import java.util.ResourceBundle;
 
 public class GaragesController implements Initializable {
     private final Model model = Model.getInstance();
-    ObservableList<GarageResource> garageData = null;
-    ObservableList<CarResource> carData = null;
+
+    private ObservableList<GarageResource> garageData = null;
+    private ObservableList<CarResource> carData = null;
+
     private GarageResource selectedGarage = null;
+    private CarResource selectedCar = null;
+
     @FXML
     private TableView<GarageResource> tableGarages;
     @FXML
@@ -68,10 +72,8 @@ public class GaragesController implements Initializable {
     }
 
     private void init() {
-        List<GarageResource> garages = model.getAllGarages();
-        garageData = FXCollections.observableArrayList(garages);
+        garageData = FXCollections.observableArrayList();
         carData = FXCollections.observableArrayList();
-        updateTable();
         updateView();
         clearCarTextFields();
         clearGarageTextFields();
@@ -81,14 +83,16 @@ public class GaragesController implements Initializable {
     private void onButtonAddGarage(ActionEvent actionEvent) {
         String garageName = txtGarageName.getText();
         String garageAddress = txtGarageAddress.getText();
+
         GarageDto dto = new GarageDto();
         dto.setName(garageName);
         dto.setAddress(garageAddress);
-        model.addGarage(dto);
-        garageData.clear();
-        garageData.setAll(model.getAllGarages());
-        updateTable();
-        updateView();
+
+        new Thread(()->{
+            model.addGarage(dto);
+            updateView();
+        }).start();
+
         clearGarageTextFields();
     }
 
@@ -97,19 +101,19 @@ public class GaragesController implements Initializable {
         String carName = txtCarName.getText();
         String carBrand = txtCarBrand.getText();
         String carPS = txtCarPS.getText();
+
         CarDto carDto = new CarDto();
         carDto.setName(carName);
         carDto.setBrand(carBrand);
         carDto.setHorsePower(carPS);
-        model.addCarToGarage(selectedGarage.getId(),carDto);
 
-        List<CarResource> allCarsOfGarage = model.getAllCarsOfGarage(selectedGarage.getId());
-        carData.clear();
-        carData.setAll(allCarsOfGarage);
-        updateView();
-        updateTable();
+        new Thread(()->{
+            selectedGarage = null;
+            model.addCarToGarage(selectedGarage.getId(), carDto);
+            updateView();
+        }).start();
+
         clearCarTextFields();
-        clearGarageTextFields();
     }
 
     @FXML
@@ -117,33 +121,38 @@ public class GaragesController implements Initializable {
         GarageResource selectedItem = tableGarages.getSelectionModel().getSelectedItem();
         selectedGarage = selectedItem;
 
-        List<CarResource> allCarsOfGarage = model.getAllCarsOfGarage(selectedGarage.getId());
-        carData.clear();
-        carData.setAll(allCarsOfGarage);
+        txtGarageName.setText(selectedGarage.getName());
+        txtGarageAddress.setText(selectedGarage.getAddress());
+
         updateView();
-        updateTable();
 
         tableGarages.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void handleCarSelection(MouseEvent mouseEvent) {
+        CarResource selectedItem = tableCars.getSelectionModel().getSelectedItem();
 
     }
 
-    private void updateTable() {
-        tableGarages.setItems(garageData);
-        tableCars.setItems(carData);
-    }
+    private synchronized void updateView() {
+        List<GarageResource> garages = model.getAllGarages();
+        garageData.clear();
+        garageData.setAll(garages);
 
-    private void updateView() {
-        if (selectedGarage == null) {
-            buttonAdd.setDisable(true);
-            lblSelectedGarage.setText("No garage selected!");
-        } else {
+        if (selectedGarage != null) {
             buttonAdd.setDisable(false);
             lblSelectedGarage.setText(selectedGarage.getName());
+
+            List<CarResource> allCarsOfGarage = model.getAllCarsOfGarage(selectedGarage.getId());
+            carData.clear();
+            carData.setAll(allCarsOfGarage);
+        }else{
+            buttonAdd.setDisable(true);
+            lblSelectedGarage.setText("No garage selected!");
         }
+        tableGarages.setItems(garageData);
+        tableCars.setItems(carData);
     }
 
     private void clearGarageTextFields() {
