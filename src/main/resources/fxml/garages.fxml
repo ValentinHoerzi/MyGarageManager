@@ -1,74 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import java.lang.*?>
-<AnchorPane prefHeight="724.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="net.hoerzintelligence.mygarages.controller.GaragesController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="724.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.hoerzintelligence.mygarages.controller.GaragesController">
     <children>
-        <TableView fx:id="tableGarages" layoutX="89.0" layoutY="79.0" onMouseClicked="#handleGarageSelection"
-                   prefHeight="180.0" prefWidth="550.0" styleClass="tableView">
+
+        <TableView fx:id="tblGarages" layoutX="89.0" layoutY="79.0" onMouseClicked="#handleGarageSelection" prefHeight="180.0" prefWidth="550.0" styleClass="tableView">
             <columns>
-                <TableColumn fx:id="columnId" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="50.0"
-                             resizable="false" text="Id">
+                <TableColumn fx:id="columnId" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="50.0" resizable="false" text="Id">
                     <styleClass>
-                        <String fx:value="tableColumn-"/>
-                        <String fx:value="tableColumn2"/>
+                        <String fx:value="tableColumn-" />
+                        <String fx:value="tableColumn2" />
                     </styleClass>
                 </TableColumn>
-                <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0"
-                             resizable="false" text="Name">
+                <TableColumn fx:id="columnName" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="Name">
                     <styleClass>
-                        <String fx:value="tableColumn"/>
-                        <String fx:value="tableColumn3"/>
+                        <String fx:value="tableColumn" />
+                        <String fx:value="tableColumn3" />
                     </styleClass>
                 </TableColumn>
-                <TableColumn fx:id="columnAddress" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0"
-                             resizable="false" text="Address">
+                <TableColumn fx:id="columnAddress" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="Address">
                     <styleClass>
-                        <String fx:value="tableColumn-"/>
-                        <String fx:value="tableColumn4"/>
+                        <String fx:value="tableColumn-" />
+                        <String fx:value="tableColumn4" />
                     </styleClass>
                 </TableColumn>
             </columns>
         </TableView>
-        <Button layoutX="89.0" layoutY="282.0" mnemonicParsing="false" onAction="#onButtonAddGarage" prefWidth="50.0"
-                text="Add"/>
-        <TextField fx:id="txtGarageAddress" layoutX="389.0" layoutY="282.0" prefWidth="250.0" promptText="Address"/>
-        <TextField fx:id="txtGarageName" layoutX="139.0" layoutY="282.0" prefWidth="250.0" promptText="Name"/>
-        <TableView fx:id="tableCars" layoutX="89.0" layoutY="420.0" prefHeight="180.0" prefWidth="550.0"
-                   onMouseClicked="#handleCarSelection"
-                   styleClass="tableView">
+
+        <Button layoutX="89.0" layoutY="282.0" mnemonicParsing="false" onAction="#onbtnAddGarage" prefWidth="50.0" text="Add" />
+        <TextField fx:id="txtGarageAddress" layoutX="389.0" layoutY="282.0" prefWidth="250.0" promptText="Address" />
+        <TextField fx:id="txtGarageName" layoutX="139.0" layoutY="282.0" prefWidth="250.0" promptText="Name" />
+        <Button fx:id="btnEditGarage" layoutX="139.0" layoutY="316.0" mnemonicParsing="false" onAction="#onbtnEditGarage" prefHeight="25.0" prefWidth="250.0" text="Edit" />
+        <Button fx:id="btnDeleteGarage" layoutX="389.0" layoutY="316.0" mnemonicParsing="false" onAction="#onbtnDeleteGarage" prefHeight="25.0" prefWidth="250.0" text="Delete" />
+
+        <Label fx:id="lblSelectedGarage" layoutX="89.0" layoutY="362.0" prefHeight="49.0" prefWidth="150.0" />
+        <TableView fx:id="tblCars" layoutX="89.0" layoutY="420.0" onMouseClicked="#handleCarSelection" prefHeight="180.0" prefWidth="550.0" styleClass="tableView">
             <columns>
-                <TableColumn fx:id="columnCarId" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="50.0"
-                             resizable="false" text="Id">
+                <TableColumn fx:id="columnCarId" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="50.0" resizable="false" text="Id">
                     <styleClass>
-                        <String fx:value="tableColumn-"/>
-                        <String fx:value="tableColumn2"/>
+                        <String fx:value="tableColumn-" />
+                        <String fx:value="tableColumn2" />
                     </styleClass>
                 </TableColumn>
-                <TableColumn fx:id="columnbrandAndName" maxWidth="1.7976931348623157E308" minWidth="-1.0"
-                             prefWidth="350.0" resizable="false" text="Brand and Name">
+                <TableColumn fx:id="columnbrandAndName" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="350.0" resizable="false" text="Brand and Name">
                     <styleClass>
-                        <String fx:value="tableColumn"/>
-                        <String fx:value="tableColumn3"/>
+                        <String fx:value="tableColumn" />
+                        <String fx:value="tableColumn3" />
                     </styleClass>
                 </TableColumn>
-                <TableColumn fx:id="columnPS" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0"
-                             resizable="false" text="PS">
+                <TableColumn fx:id="columnPS" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" resizable="false" text="PS">
                     <styleClass>
-                        <String fx:value="tableColumn-"/>
-                        <String fx:value="tableColumn4"/>
+                        <String fx:value="tableColumn-" />
+                        <String fx:value="tableColumn4" />
                     </styleClass>
                 </TableColumn>
             </columns>
         </TableView>
-        <Button fx:id="buttonAdd" layoutX="89.0" layoutY="629.0" mnemonicParsing="false" onAction="#onButtonAddCar" prefWidth="50.0"
-                text="Add"/>
-        <TextField fx:id="txtCarPS" layoutX="489.0" layoutY="629.0" prefWidth="150.0" promptText="PS"/>
-        <TextField fx:id="txtCarName" layoutX="314.0" layoutY="629.0" prefWidth="175.0" promptText="Name"/>
-        <TextField fx:id="txtCarBrand" layoutX="139.0" layoutY="629.0" prefWidth="175.0" promptText="Brand"/>
-        <Label fx:id="lblSelectedGarage" layoutX="89.0" layoutY="362.0" prefHeight="49.0" prefWidth="150.0"/>
+        <Button fx:id="btnAddCar" layoutX="89.0" layoutY="629.0" mnemonicParsing="false" onAction="#onbtnAddCar" prefWidth="50.0" text="Add" />
+        <TextField fx:id="txtCarPS" layoutX="489.0" layoutY="629.0" prefWidth="150.0" promptText="PS" />
+        <TextField fx:id="txtCarName" layoutX="314.0" layoutY="629.0" prefWidth="175.0" promptText="Name" />
+        <TextField fx:id="txtCarBrand" layoutX="139.0" layoutY="629.0" prefWidth="175.0" promptText="Brand" />
+        <Button fx:id="btnDeleteCar" layoutX="489.0" layoutY="663.0" mnemonicParsing="false" onAction="#onbtnDeleteCar" prefHeight="25.0" prefWidth="150.0" text="Delete" />
+        <Label layoutX="139.0" layoutY="663.0" prefHeight="25.0" prefWidth="175.0" text="Move car to other garage:" />
+        <TextField fx:id="garageIdToMove" layoutX="312.0" layoutY="663.0" prefHeight="25.0" prefWidth="90.0" promptText="Garage Id" />
+        <Button fx:id="btnMoveCar" layoutX="402.0" layoutY="663.0" mnemonicParsing="false" onAction="#onbtnMoveCar" prefWidth="90.0" text="Move" />
+      <Label fx:id="lblPerformingOperation" layoutX="89.0" layoutY="22.0" prefHeight="49.0" prefWidth="228.0" text="Currently not performing operation" />
     </children>
 </AnchorPane>
