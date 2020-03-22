@@ -6,9 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import net.hoerzintelligence.mygarages.data.car.CarDto;
 import net.hoerzintelligence.mygarages.data.car.CarResource;
 import net.hoerzintelligence.mygarages.data.garage.GarageDto;
@@ -91,6 +96,7 @@ public class GaragesController implements Initializable {
 
         clearCarTextFields();
         clearGarageTextFields();
+        lblPerformingOperation.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     @FXML
@@ -145,18 +151,47 @@ public class GaragesController implements Initializable {
         clearCarTextFields();
     }
 
-    private void performOperation(boolean performing) {
-        lblPerformingOperation.setText(performing ? "Currently performing operation" : "Currently not performing operation");
-    }
-
     @FXML
     private void onbtnEditGarage(ActionEvent actionEvent) {
+        String garageName = txtGarageName.getText();
+        String garageAddress = txtGarageAddress.getText();
 
+        GarageDto dto = new GarageDto();
+        dto.setName(garageName);
+        dto.setAddress(garageAddress);
+
+        int id = selectedGarage.getId();
+        new Thread(() -> {
+            Platform.runLater(() -> performOperation(true));
+
+            model.editGarage(id, dto);
+
+            Platform.runLater(() -> performOperation(false));
+
+            selectedGarage = null;
+
+            Platform.runLater(() -> updateView(true));
+        }).start();
+
+        clearGarageTextFields();
     }
 
     @FXML
     private void onbtnDeleteGarage(ActionEvent actionEvent) {
+        int id = selectedGarage.getId();
+        new Thread(() -> {
+            Platform.runLater(() -> performOperation(true));
 
+            model.deleteGarage(id);
+
+            Platform.runLater(() -> performOperation(false));
+
+            selectedGarage = null;
+
+            Platform.runLater(() -> updateView(true));
+        }).start();
+
+        clearGarageTextFields();
     }
 
     @FXML
@@ -178,7 +213,6 @@ public class GaragesController implements Initializable {
         txtGarageName.setText(selectedGarage.getName());
         txtGarageAddress.setText(selectedGarage.getAddress());
 
-
         updateView(false);
 
         tblGarages.getSelectionModel().clearSelection();
@@ -191,8 +225,6 @@ public class GaragesController implements Initializable {
 
             Platform.runLater(() -> performOperation(false));
         }).start();
-
-
     }
 
     @FXML
@@ -262,6 +294,14 @@ public class GaragesController implements Initializable {
         txtCarBrand.setText("");
         txtCarName.setText("");
         txtCarPS.setText("");
+    }
 
+    private void performOperation(boolean performing) {
+        if (performing) {
+            lblPerformingOperation.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        } else {
+            lblPerformingOperation.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+        lblPerformingOperation.setText(performing ? "Currently performing operation" : "Currently not performing operation");
     }
 }
