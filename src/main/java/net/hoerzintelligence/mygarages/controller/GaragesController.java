@@ -213,6 +213,7 @@ public class GaragesController implements Initializable {
 
             Platform.runLater(() -> performOperation(false));
         }).start();
+        clearCarTextFields();
     }
 
     @FXML
@@ -233,6 +234,7 @@ public class GaragesController implements Initializable {
 
             Platform.runLater(() -> performOperation(false));
         }).start();
+        clearCarTextFields();
     }
 
     @FXML
@@ -250,6 +252,7 @@ public class GaragesController implements Initializable {
         tblGarages.getSelectionModel().clearSelection();
 
         refreshCarsAsync();
+        clearCarTextFields();
     }
 
     @FXML
