@@ -3,13 +3,11 @@ package net.hoerzintelligence.mygarages.controller;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -19,7 +17,6 @@ import net.hoerzintelligence.mygarages.data.car.CarResource;
 import net.hoerzintelligence.mygarages.data.garage.GarageDto;
 import net.hoerzintelligence.mygarages.data.garage.GarageResource;
 import net.hoerzintelligence.mygarages.services.Model;
-import org.apache.catalina.filters.RemoteIpFilter;
 
 import java.net.URL;
 import java.util.List;
@@ -185,11 +182,11 @@ public class GaragesController implements Initializable {
 
             model.deleteGarage(id);
 
-            Platform.runLater(() -> performOperation(false));
-
+            Platform.runLater(() -> updateView(true));
             selectedGarage = null;
 
-            Platform.runLater(() -> updateView(true));
+            Platform.runLater(() -> performOperation(false));
+
         }).start();
 
         clearGarageTextFields();
@@ -203,24 +200,39 @@ public class GaragesController implements Initializable {
         new Thread(() -> {
             Platform.runLater(() -> performOperation(true));
 
-            model.deleteCarInGarage(garageId,carId);
+            model.deleteCarInGarage(garageId, carId);
 
-            for(CarResource c : carData){
-                if(c.getId() == carId){
+            for (CarResource c : carData) {
+                if (c.getId() == carId) {
                     carData.remove(c);
                     break;
                 }
             }
 
-            Platform.runLater(() -> performOperation(false));
-
             selectedCar = null;
+
+            Platform.runLater(() -> performOperation(false));
         }).start();
     }
 
     @FXML
     private void onbtnMoveCar() {
+        int garageIdNew = Integer.parseInt(garageIdToMove.getText());
+        int carId = selectedCar.getId();
+        int garageIdOld = selectedGarage.getId();
 
+
+        new Thread(() -> {
+            Platform.runLater(() -> performOperation(true));
+
+            model.moveCarToOtherGarage(garageIdOld, carId, garageIdNew);
+
+            selectedCar = null;
+
+            Platform.runLater(() -> updateView(true));
+
+            Platform.runLater(() -> performOperation(false));
+        }).start();
     }
 
     @FXML
@@ -306,6 +318,7 @@ public class GaragesController implements Initializable {
         } else {
             btnDeleteCar.setDisable(true);
             btnMoveCar.setDisable(true);
+            carData.clear();
             clearCarTextFields();
         }
     }
@@ -319,6 +332,7 @@ public class GaragesController implements Initializable {
         txtCarBrand.setText("");
         txtCarName.setText("");
         txtCarPS.setText("");
+        garageIdToMove.setText("");
     }
 
     private void performOperation(boolean performing) {

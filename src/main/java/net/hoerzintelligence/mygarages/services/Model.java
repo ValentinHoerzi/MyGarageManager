@@ -48,7 +48,7 @@ public class Model {
         return service.deleteCarInGarage(garageId,carId);
     }
 
-    GarageResource moveCarToOtherGarage(Integer garageIdOld, Integer carId, Integer garageIdNew){
+    public GarageResource moveCarToOtherGarage(Integer garageIdOld, Integer carId, Integer garageIdNew){
         return service.moveCarToOtherGarage(garageIdOld,carId,garageIdNew);
     }
 }
