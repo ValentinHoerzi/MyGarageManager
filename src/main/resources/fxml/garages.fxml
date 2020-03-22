@@ -25,7 +25,7 @@
                         <String fx:value="tableColumn3"/>
                     </styleClass>
                 </TableColumn>
-                <TableColumn fx:id="columnAddress" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0"
+                <TableColumn fx:id="columnAddress" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="245.0"
                              resizable="false" text="Address">
                     <styleClass>
                         <String fx:value="tableColumn-"/>

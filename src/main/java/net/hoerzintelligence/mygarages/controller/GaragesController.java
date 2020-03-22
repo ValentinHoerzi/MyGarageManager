@@ -19,6 +19,7 @@ import net.hoerzintelligence.mygarages.data.car.CarResource;
 import net.hoerzintelligence.mygarages.data.garage.GarageDto;
 import net.hoerzintelligence.mygarages.data.garage.GarageResource;
 import net.hoerzintelligence.mygarages.services.Model;
+import org.apache.catalina.filters.RemoteIpFilter;
 
 import java.net.URL;
 import java.util.List;
@@ -100,7 +101,7 @@ public class GaragesController implements Initializable {
     }
 
     @FXML
-    private void onbtnAddGarage(ActionEvent actionEvent) {
+    private void onbtnAddGarage() {
         String garageName = txtGarageName.getText();
         String garageAddress = txtGarageAddress.getText();
 
@@ -125,7 +126,7 @@ public class GaragesController implements Initializable {
     }
 
     @FXML
-    private void onbtnAddCar(ActionEvent actionEvent) {
+    private void onbtnAddCar() {
         String carName = txtCarName.getText();
         String carBrand = txtCarBrand.getText();
         String carPS = txtCarPS.getText();
@@ -152,7 +153,7 @@ public class GaragesController implements Initializable {
     }
 
     @FXML
-    private void onbtnEditGarage(ActionEvent actionEvent) {
+    private void onbtnEditGarage() {
         String garageName = txtGarageName.getText();
         String garageAddress = txtGarageAddress.getText();
 
@@ -177,7 +178,7 @@ public class GaragesController implements Initializable {
     }
 
     @FXML
-    private void onbtnDeleteGarage(ActionEvent actionEvent) {
+    private void onbtnDeleteGarage() {
         int id = selectedGarage.getId();
         new Thread(() -> {
             Platform.runLater(() -> performOperation(true));
@@ -195,18 +196,37 @@ public class GaragesController implements Initializable {
     }
 
     @FXML
-    private void onbtnDeleteCar(ActionEvent actionEvent) {
+    private void onbtnDeleteCar() {
+        int carId = selectedCar.getId();
+        int garageId = selectedGarage.getId();
+
+        new Thread(() -> {
+            Platform.runLater(() -> performOperation(true));
+
+            model.deleteCarInGarage(garageId,carId);
+
+            for(CarResource c : carData){
+                if(c.getId() == carId){
+                    carData.remove(c);
+                    break;
+                }
+            }
+
+            Platform.runLater(() -> performOperation(false));
+
+            selectedCar = null;
+        }).start();
+    }
+
+    @FXML
+    private void onbtnMoveCar() {
 
     }
 
     @FXML
-    private void onbtnMoveCar(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    private void handleGarageSelection(MouseEvent mouseEvent) {
+    private void handleGarageSelection() {
         GarageResource selectedItem = tblGarages.getSelectionModel().getSelectedItem();
+        if (selectedItem.equals(selectedGarage)) return;
         selectedGarage = selectedItem;
         selectedCar = null;
 
@@ -217,19 +237,13 @@ public class GaragesController implements Initializable {
 
         tblGarages.getSelectionModel().clearSelection();
 
-        new Thread(() -> {
-            Platform.runLater(() -> performOperation(true));
-
-            List<CarResource> allCarsOfGarage = model.getAllCarsOfGarage(selectedGarage.getId());
-            Platform.runLater(() -> carData.setAll(allCarsOfGarage));
-
-            Platform.runLater(() -> performOperation(false));
-        }).start();
+        refreshCarsAsync();
     }
 
     @FXML
-    private void handleCarSelection(MouseEvent mouseEvent) {
+    private void handleCarSelection() {
         CarResource selectedItem = tblCars.getSelectionModel().getSelectedItem();
+        if (selectedItem.equals(selectedCar)) return;
         selectedCar = selectedItem;
 
         String[] vars = selectedCar.getBrandAndName().split(" ");
@@ -240,6 +254,17 @@ public class GaragesController implements Initializable {
         tblCars.getSelectionModel().clearSelection();
 
         updateView(false);
+    }
+
+    private void refreshCarsAsync() {
+        new Thread(() -> {
+            Platform.runLater(() -> performOperation(true));
+
+            List<CarResource> allCarsOfGarage = model.getAllCarsOfGarage(selectedGarage.getId());
+            Platform.runLater(() -> carData.setAll(allCarsOfGarage));
+
+            Platform.runLater(() -> performOperation(false));
+        }).start();
     }
 
     private void updateView(boolean refreshGarages) {
